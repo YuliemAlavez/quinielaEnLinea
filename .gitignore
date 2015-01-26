@@ -1,0 +1,6 @@
+## Ignoramos todos los archivos que terminen en "~"
+*~
+
+## Ignoramos todos los archivos que terminen en ".temp"
+*.temp
+
