@@ -1,3 +1,7 @@
 quiniela_main_homepage:
-    path:     /hello/{name}
+    path:     /hola/{name}
     defaults: { _controller: QuinielaMainBundle:Default:index }
+
+quiniela_list_all_teams:
+    path:    /view/AllTeams
+    defaults: { _controller: QuinielaMainBundle:Default:allTeams }
