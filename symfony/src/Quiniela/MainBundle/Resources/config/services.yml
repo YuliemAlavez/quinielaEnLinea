@@ -1,0 +1,7 @@
+parameters:
+#    quiniela_main.example.class: Quiniela\MainBundle\Example
+
+services:
+#    quiniela_main.example:
+#        class: %quiniela_main.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,3 +1,7 @@
+quiniela_main:
+    resource: "@QuinielaMainBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: @AppBundle/Controller/
     type:     annotation
