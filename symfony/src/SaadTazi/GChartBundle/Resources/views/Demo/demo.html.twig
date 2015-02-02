@@ -1,0 +1,94 @@
+{% extends "SaadTaziGChartBundle::layout.html.twig" %}
+
+{% block content %}
+
+<h2>QR Code Demo</h2>
+<img src="{{ gchart_get_qrcode_url('hello Montréal') }}"/>
+<hr/>
+<img src="{{ gchart_get_qrcode_url('hello Montréal', {'width':200, 'height': 200, 'encoding': 'ISO-8859-1', 'correctionLevel': 'M'}) }}"/>
+<hr/>
+
+<h2>Visualization Chart Demo</h2>
+<div id="chart2">Chart 2&nbsp;</div>
+<script>
+	$(function() {
+		{{ gchart_column_chart(dataTable2, 'chart2', 400, 200, 'coucou') }}
+	});
+</script>
+<hr/>
+
+
+
+<h2>linechart with options</h2>
+<div id="chart3">Chart 3&nbsp;</div>
+<script>
+	$(function() {
+		{{ gchart_line_chart(dataTable2, 'chart3', 400, 200, 'coucou',{'hAxis': {'title': 'Hello',  'titleTextStyle': {'color': '#FF0000'}}}) }}
+	});
+</script>
+<hr/>
+
+<h2>Chart 4</h2>
+<div id="chart4">Chart 4&nbsp;</div>
+<script>
+	$(function() {
+		{{ gchart_bar_chart(dataTable2, 'chart4', 400, 200, 'coucou') }}
+	});
+</script>
+<hr/>
+
+<h2>Chart from Matrix 5</h2>
+<div id="chartfromMatrix5">Chart from Matrix 5&nbsp;</div>
+<script>
+	$(function() {
+		{{ gchart_bar_chart(dataTable5, 'chartfromMatrix5', 400, 200, 'from table5') }}
+	});
+</script>
+<hr/>
+
+<h2>Chart from Matrix 6</h2>
+<div id="chartfromMatrix6">Chart from Matrix 6&nbsp;</div>
+<script>
+	$(function() {
+		{{ gchart_bar_chart(dataTable6, 'chartfromMatrix6', 400, 200, 'from table6') }}
+	});
+</script>
+<hr/>
+
+<h2>Chart 5</h2>
+<div id="chart5">Chart 5&nbsp;</div>
+<script>
+	$(function() {
+		{{ gchart_area_chart(dataTable2, 'chart5', 400, 200, 'coucou') }}
+	});
+</script>
+<hr/>
+
+<h2>Chart 7</h2>
+<div id="chart7">Chart 7&nbsp;</div>
+<script>
+	$(function() {
+		{{ gchart_combo_chart(dataTable2, 'chart7', 400, 200, 'line', 'combo', {'series': {1: {'type': 'bars'} } }) }}
+	});
+</script>
+<hr/>
+
+
+<div id="table1">Table 1&nbsp;</div>
+<script>
+	$(function() {
+		{{ gchart_table(dataTable2, 'table1') }}
+	});
+</script>
+<hr/>
+
+<h2>Chart from matrix 7</h2>
+<div id="chartfromMatrix7">Chart from matrix 7&nbsp;</div>
+<script>
+	$(function() {
+		{{ gchart_table(dataTable7, 'chartfromMatrix7', 400, 200, 'from table7') }}
+	});
+</script>
+<hr/>
+
+{% endblock %}

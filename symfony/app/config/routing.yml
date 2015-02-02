@@ -5,3 +5,8 @@ quiniela_main:
 app:
     resource: @AppBundle/Controller/
     type:     annotation
+    
+_demo:
+    resource: "@SaadTaziGChartBundle/Resources/config/routing.yml"
+    type:     yaml
+    prefix:   /gchart

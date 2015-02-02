@@ -1,0 +1,7 @@
+var data{{ id }} = new google.visualization.DataTable({{ data | json_encode | replace({"\"[new Date]": 'new Date', "[new Date]\"": ""}) | raw }});
+
+// Create and draw the visualization.
+var chart{{ id }} = new google.visualization.{{ chartType }}(document.getElementById('{{ id }}'));
+chart{{ id }}.draw(data{{ id }}, {{ config | json_encode | raw }});
+
+
