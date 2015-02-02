@@ -1,5 +1,38 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-	{{ form(form) }}
+
+	{#{{ form(form) }}#}
+	{{ form_start(form) }}
+	<div class="form_error"> {{ form_errors(form) }} </div>
+
+	<div class="form_bloque">
+		<div class="form_error"> {{ form_errors(form.scorelocalteam) }} </div>
+		<div class="form_label"> Marcador Local: </div>
+		<div class="form_input"> {{ form_widget(form.scorelocalteam) }}</div>
+	</div>
+
+	<div class="form_bloque">
+		<div class="form_error"> {{ form_errors(form.scorevisitingteam) }} </div>
+		<div class="form_label"> Marcador Visitante: </div>
+		<div class="form_input"> {{ form_widget(form.scorevisitingteam) }}</div>
+	</div>
+
+	<div class="form_bloque">
+		<div class="form_error"> {{ form_errors(form.game) }} </div>
+		<div class="form_label"> Juego: </div>
+		<div class="form_input"> {{ form_widget(form.game) }}</div>
+	</div>
+
+	<div class="form_bloque">
+		<div class="form_error"> {{ form_errors(form.user) }} </div>
+		<div class="form_label"> Usuario: </div>
+		<div class="form_input"> {{ form_widget(form.user) }}</div>
+	</div>
+
+	<div class="form_bloque">
+		{{ form_widget(form.Guardar)}}
+	</div>
+	{{ form_end(form) }}
+	
 {% endblock %}
