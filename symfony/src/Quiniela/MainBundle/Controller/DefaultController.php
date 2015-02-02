@@ -2,11 +2,13 @@
 
 namespace Quiniela\MainBundle\Controller;
 
-use Leg\GoogleChartsBundle\Charts\Gallery\BarChart;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\Mapping as ORM;
 
 use SaadTazi\GChartBundle\DataTable;
+
+use Quiniela\MainBundle\Form\PredictionType;
+
 
 class DefaultController extends Controller
 {
@@ -42,5 +44,10 @@ class DefaultController extends Controller
     		array('teams'=>$teams,'jsonTable'=>$jsonTable,'table'=>$table->toArray())
     	);
         
+    }
+    public function newPredictionAction(){
+        $form = $this->createForm(new PredictionType());
+
+        return $this->render("QuinielaMainBundle:Default:newPrediction.html.twig", array('form'=> $form->createView()));
     }
 }

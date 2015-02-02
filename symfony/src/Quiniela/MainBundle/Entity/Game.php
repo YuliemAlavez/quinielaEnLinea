@@ -281,4 +281,9 @@ class Game
     {
         return $this->visitingteam;
     }
+
+    public function __toString(){
+        return $this->localteam->getName().' vs '.$this->visitingteam->getName();
+        
+    }
 }

@@ -212,4 +212,7 @@ class User
     {
         return $this->updatedat;
     }
+    public function __toString(){
+        return $this->name.' '.$this->lastname;
+    }
 }
