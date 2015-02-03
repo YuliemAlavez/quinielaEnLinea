@@ -3,11 +3,17 @@
 namespace Quiniela\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
+
 use Doctrine\ORM\Mapping as ORM;
 
 use SaadTazi\GChartBundle\DataTable;
 
 use Quiniela\MainBundle\Form\PredictionType;
+
+
+use Quiniela\MainBundle\Entity\Prediction;
 
 
 class DefaultController extends Controller
@@ -45,9 +51,18 @@ class DefaultController extends Controller
     	);
         
     }
-    public function newPredictionAction(){
-        $form = $this->createForm(new PredictionType());
+    public function newPredictionAction(Request $request){
+        $prediction= new Prediction();
+        $form = $this->createForm(new PredictionType(),$prediction);
 
+        $form->handleRequest($request);
+
+        if($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($prediction);
+            $em->flush();
+            return $this->redirect($this->generateUrl('quiniela_list_all_teams'));
+        }
         return $this->render("QuinielaMainBundle:Default:newPrediction.html.twig", array('form'=> $form->createView()));
     }
 }
