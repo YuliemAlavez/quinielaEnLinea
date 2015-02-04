@@ -13,6 +13,6 @@ security:
           - { path: ^/user/*, roles: ROLE_USUARIO }
       providers:
           usuarios:
-              entity: { class: Quiniela\MainBundle\Entity\Prediction, property: user }
+              entity: { class: Quiniela\MainBundle\Entity\User, property: user }
       encoders:
-          Cupon\UsuarioBundle\Entity\Usuario: { algorithm: sha512, iterations: 10 }
+        Quiniela\MainBundle\Entity\User: plaintext
