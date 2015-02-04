@@ -1,0 +1,13 @@
+{# app/Resources/views/frontend.html.twig #}
+  {% extends '::base.html.twig' %}
+  {# ... #}
+  {% block body %}
+  {# ... #}
+<aside>
+      {% block aside %}
+      <section id="login">
+          {% render 'UsuarioBundle:Default:cajaLogin' %}
+      </section>
+      {% endblock %}
+  </aside>
+  {% endblock %}

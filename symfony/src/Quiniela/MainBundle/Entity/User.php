@@ -4,13 +4,15 @@ namespace Quiniela\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var integer
@@ -63,7 +65,12 @@ class User
      */
     private $updatedat;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", length=255, nullable=false)
+     */
+    private $salt;
 
     /**
      * Get iduser
@@ -215,4 +222,48 @@ class User
     public function __toString(){
         return $this->name.' '.$this->lastname;
     }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * 
+     *
+     *  Funciones que deben de implementarse debido a que 
+     *  ahora la clase ha implementado la interface UserInterface
+     * 
+     */
+
+    function eraseCredentials()
+    {
+    }
+    function getRoles()
+    {
+        return array('ROLE_USUARIO');
+    }
+    function getUsername()
+    {
+        return $this->getUser();
+    }
+
 }

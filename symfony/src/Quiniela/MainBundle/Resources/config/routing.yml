@@ -9,3 +9,13 @@ quiniela_list_all_teams:
 quiniela_prediction:
     path:    /new/Prediction
     defaults: { _controller: QuinielaMainBundle:Default:newPrediction }
+
+user_login:
+    pattern:   /user/login
+    defaults:  { _controller: QuinielaMainBundle:Default:login }
+
+user_login_check:
+    pattern:   /user/login_check
+
+user_logout:
+    pattern:   /user/logout

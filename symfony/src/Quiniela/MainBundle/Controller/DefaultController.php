@@ -15,6 +15,7 @@ use Quiniela\MainBundle\Form\PredictionType;
 
 use Quiniela\MainBundle\Entity\Prediction;
 
+use Symfony\Component\Security\Core\SecurityContext;
 
 class DefaultController extends Controller
 {
@@ -64,5 +65,18 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('quiniela_list_all_teams'));
         }
         return $this->render("QuinielaMainBundle:Default:newPrediction.html.twig", array('form'=> $form->createView()));
+    }
+    
+    public function loginAction(Request $request){
+        $peticion = $this->getRequest();
+        $sesion = $peticion->getSession();
+        $error = $peticion->attributes->get(
+              SecurityContext::AUTHENTICATION_ERROR,
+              $sesion->get(SecurityContext::AUTHENTICATION_ERROR));
+        
+        return $this->render('QuinielaMainBundle:Default:login.html.twig', array(
+              'last_username' => $sesion->get(SecurityContext::LAST_USERNAME),
+              'error'         => $error
+        ));
     }
 }

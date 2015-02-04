@@ -15,13 +15,13 @@ class PredictionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('scorelocalteam','integer')
-            ->add('scorevisitingteam','integer')
+            ->add('scorelocalteam','integer',array('required' => true ))
+            ->add('scorevisitingteam','integer',array('required' => true ))
             ->add('createdat','datetime')
             ->add('updatedat','datetime')
-            ->add('predictionat','datetime')
-            ->add('game')
-            ->add('user')
+            ->add('predictionat','datetime',array('required' => true ))
+            ->add('game',array('required' => true ))
+            ->add('user',array('required' => true ))
             ->add('Guardar','submit')
         ;
     }
