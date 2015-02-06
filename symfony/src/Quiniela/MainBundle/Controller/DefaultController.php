@@ -27,6 +27,7 @@ class DefaultController extends Controller
 
     public function allTeamsAction(){
 
+
         $em= $this->getDoctrine()->getManager();
         $teams= $em->getRepository('QuinielaMainBundle:Team')->findAll();               
 
@@ -44,11 +45,14 @@ class DefaultController extends Controller
         $table->addRow(array('Abril',12.4));
         $table->addRow(array('Mayo',15.3));
         $table->addRow(array('Junio',37.9));
-                
+        
+        $usuario=$this->get('security.context')->getToken()->getUser();        
+        $nombre=$usuario->getName();
+
         
     	return $this->render(
     		'QuinielaMainBundle:Default:viewAllTeams.html.twig',
-    		array('teams'=>$teams,'jsonTable'=>$jsonTable,'table'=>$table->toArray())
+    		array('teams'=>$teams,'jsonTable'=>$jsonTable,'table'=>$table->toArray(),'nombre'=>$nombre,'usuario'=>$usuario)
     	);
         
     }

@@ -4,9 +4,11 @@ security:
           frontend:
               pattern:     ^/*
               anonymous: ~              
-              form_login:
+              form_login:                  
+                  default_target_path: /view/AllTeams
+                  always_use_default_target_path: true
                   login_path: user_login
-                  check_path: user_login_check
+                  check_path: user_login_check                  
               remember_me:
                 key: quinielaEnLinea123
                 lifetime: 10
@@ -15,6 +17,7 @@ security:
           - { path: ^/user/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }          
           - { path: ^/user/*, roles: ROLE_USUARIO }
           - { path: ^/view/*, roles: ROLE_USUARIO }
+          - { path: ^/*, roles: ROLE_USUARIO }
       providers:
           usuarios:
               entity: { class: Quiniela\MainBundle\Entity\User, property: user }
