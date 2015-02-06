@@ -7,7 +7,9 @@ security:
               form_login:
                   login_path: user_login
                   check_path: user_login_check
-
+              remember_me:
+                key: quinielaEnLinea123
+                lifetime: 10
       access_control:
           - { path: ^/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
           - { path: ^/user/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }          
