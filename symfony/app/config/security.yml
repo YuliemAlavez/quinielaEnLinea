@@ -3,14 +3,16 @@ security:
       firewalls:
           frontend:
               pattern:     ^/*
-              anonymous:   ~
+              anonymous: ~              
               form_login:
-                 login_path: user_login
-                 check_path: user_login_check
+                  login_path: user_login
+                  check_path: user_login_check
+
       access_control:
           - { path: ^/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-          - { path: ^/user/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+          - { path: ^/user/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }          
           - { path: ^/user/*, roles: ROLE_USUARIO }
+          - { path: ^/view/*, roles: ROLE_USUARIO }
       providers:
           usuarios:
               entity: { class: Quiniela\MainBundle\Entity\User, property: user }

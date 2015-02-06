@@ -1,6 +1,6 @@
 quiniela_main:
     resource: "@QuinielaMainBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   
 
 app:
     resource: @AppBundle/Controller/
