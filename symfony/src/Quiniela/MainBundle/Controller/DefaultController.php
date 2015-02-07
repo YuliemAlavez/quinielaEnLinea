@@ -83,4 +83,13 @@ class DefaultController extends Controller
               'error'         => $error
         ));
     }
+
+    public function generalTableAction(){
+        $usuario=$this->get('security.context')->getToken()->getUser();        
+        
+
+        return $this->render('QuinielaMainBundle:Default:generalTable.html.twig',
+                                array('usuario'=>$usuario)
+                            );
+    }
 }

@@ -10,6 +10,9 @@ quiniela_prediction:
     path:    /new/Prediction
     defaults: { _controller: QuinielaMainBundle:Default:newPrediction }
 
+quiniela_general_table:
+    path:   /view/GeneralTable
+    defaults: { _controller: QuinielaMainBundle:Default:generalTable}
 user_login:
     pattern:   /user/login
     defaults:  { _controller: QuinielaMainBundle:Default:login }
