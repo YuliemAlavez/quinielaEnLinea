@@ -3,9 +3,44 @@
 <div>
 
 <div>
-	{{usuario.name}}
-	{{usuario.lastname}}
-	{{usuario.idUser}}
+	{{user.name}}
+	{{user.lastname}}
+	{{user.idUser}}
+
+	
+</div>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Resultados Quiniela</th>
+			</tr>
+			<tr>
+				<th>Jornada</th><th> J-01 </th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th> Elaborado por Aldey, Inc.</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for us in users%}
+				<tr>
+					<th>{{us.name}} {{us.lastname}} {{us.idUser}}</th>
+
+					
+						{% for prediction in predictionsUsers[us.idUser] %}							
+							<th> {{ prediction.scoreLocalTeam }} </th>
+							<th> {{ prediction.scoreVisitingTeam }} </th>							
+						{% endfor %}			
+					
+					
+				</tr>			
+			{% endfor %}
+		</tbody>
+	</table>
+
 </div>
 
 

@@ -85,11 +85,51 @@ class DefaultController extends Controller
     }
 
     public function generalTableAction(){
-        $usuario=$this->get('security.context')->getToken()->getUser();        
         
+        $season='J-01';
+        //Obteniendo al usuario actual que está en el sistema
+        $user=$this->get('security.context')->getToken()->getUser();        
+        
+        //Obtengo de la base de datos a todos los usuarios
+        $em= $this->getDoctrine()->getManager();   
+
+
+        $users= $em->getRepository('QuinielaMainBundle:User')->findAll();
+        
+        foreach ($users as $us ) {            
+            $query= $em->createQuery('  SELECT o FROM 
+                                                    QuinielaMainBundle:Prediction o JOIN 
+                                                    o.game g 
+                                                   
+                                                WHERE 
+                                                    
+                                                    o.user = :user
+                                    ');
+            //$query->setParameter('season',$season);
+            $query->setParameter('user',$us->getidUser());
+
+            $predictionsUsers[$us->getidUser()]=$query->getResult();
+
+            //Obtengo todas la predicciones por usuario
+        
+        
+           //Obtenemos las predicciones de los usuarios por todas las jornadas
+           //$predictionsUsers[$us->getidUser()]=$em->getRepository('QuinielaMainBundle:Prediction')->findByUser($us);            
+        }
+
+        //Obtenemos las predicciones del usuario por jornadas
+        //$predictionsUser= $em->getRepository('QuinielaMainBundle:Prediction')->findAll;
+
+
+        //Obtenemos las predicciones de los usuarios por todas las jornadas
+        //$predictionsUsers=$em->getRepository('QuinielaMainBundle:Prediction')->findAll();
+
 
         return $this->render('QuinielaMainBundle:Default:generalTable.html.twig',
-                                array('usuario'=>$usuario)
+                                array('user'=>$user,'users'=>$users,'predictionsUsers'=>
+                                    $predictionsUsers)
                             );
+
+
     }
 }
