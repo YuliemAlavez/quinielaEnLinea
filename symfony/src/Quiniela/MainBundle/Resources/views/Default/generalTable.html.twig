@@ -10,18 +10,38 @@
 	
 </div>
 <div>
-	<table>
+
+
+</div>
+	<table border="1" class="reference" style="width: 100%;">
 		<thead>
 			<tr>
-				<th>Resultados Quiniela</th>
+				<th colspan="19">Resultados Quiniela</th>
 			</tr>
 			<tr>
-				<th>Jornada</th><th> J-01 </th>
+				<th colspan="19"> J-01 </th>
 			</tr>
+			
+				<tr>
+				<th></th>
+				{% for game in gamesSeason %}
+					<th ><span class="aniodemo">{{game.localTeam.name}}</span></th>
+					<th ><span class="aniodemo">{{game.visitingTeam.name}}</span></th>
+				{% endfor %}
+				</tr>
+			
+			<tr>
+				<th></th>
+				{% for game in gamesSeason%}
+					<th>{{game.scorelocalTeam}}</th>
+					<th>{{game.scoreVisitingTeam}}</th>
+				{% endfor %}
+			</tr>
+			
 		</thead>
 		<tfoot>
 			<tr>
-				<th> Elaborado por Aldey, Inc.</th>
+				<th colspan="19"> Elaborado por Aldey, Inc.</th>
 			</tr>
 		</tfoot>
 		<tbody>
@@ -42,5 +62,22 @@
 	</table>
 
 </div>
+
+<style type="text/css">
+.aniodemo {
+  height: 10em;
+  width: 1em;
+  display: block;
+  font-size: .8em;
+  position: relative;
+  right: -4.5em;
+  
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+</style>
+
+
 
 

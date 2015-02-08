@@ -86,7 +86,7 @@ class DefaultController extends Controller
 
     public function generalTableAction(){
         
-        $season='J-01';
+        $season=3;
         //Obteniendo al usuario actual que está en el sistema
         $user=$this->get('security.context')->getToken()->getUser();        
         
@@ -97,15 +97,18 @@ class DefaultController extends Controller
         $users= $em->getRepository('QuinielaMainBundle:User')->findAll();
         
         foreach ($users as $us ) {            
-            $query= $em->createQuery('  SELECT o FROM 
+            $query= $em->createQuery('  SELECT o,g FROM 
                                                     QuinielaMainBundle:Prediction o JOIN 
-                                                    o.game g 
-                                                   
+                                                    o.game g JOIN
+                                                    g.season s
                                                 WHERE 
-                                                    
+                                                    s = :season AND
                                                     o.user = :user
+                                                ORDER BY 
+                                                    g.gameat ASC
+
                                     ');
-            //$query->setParameter('season',$season);
+            $query->setParameter('season',$season);
             $query->setParameter('user',$us->getidUser());
 
             $predictionsUsers[$us->getidUser()]=$query->getResult();
@@ -117,6 +120,8 @@ class DefaultController extends Controller
            //$predictionsUsers[$us->getidUser()]=$em->getRepository('QuinielaMainBundle:Prediction')->findByUser($us);            
         }
 
+        $gamesSeason=$em->getRepository('QuinielaMainBundle:Game')->findBySeason($season);
+
         //Obtenemos las predicciones del usuario por jornadas
         //$predictionsUser= $em->getRepository('QuinielaMainBundle:Prediction')->findAll;
 
@@ -127,9 +132,10 @@ class DefaultController extends Controller
 
         return $this->render('QuinielaMainBundle:Default:generalTable.html.twig',
                                 array('user'=>$user,'users'=>$users,'predictionsUsers'=>
-                                    $predictionsUsers)
+                                    $predictionsUsers,'gamesSeason'=>$gamesSeason)
                             );
 
 
     }
 }
+
