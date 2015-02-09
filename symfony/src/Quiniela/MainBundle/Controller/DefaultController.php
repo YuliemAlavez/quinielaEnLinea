@@ -89,9 +89,7 @@ class DefaultController extends Controller
 
     public function newGameAction(Request $request){
             $game=new Game();
-            $game->setCreatedat( new \DateTime() );
-            $game->setUpdatedat( new \DateTime() );
-            $game->setGameat( new \DateTime());
+            
 
             $form=$this->createForm( new GameType(),$game );
             

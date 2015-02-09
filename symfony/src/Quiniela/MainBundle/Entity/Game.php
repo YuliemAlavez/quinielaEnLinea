@@ -286,4 +286,10 @@ class Game
         return $this->localteam->getName().' vs '.$this->visitingteam->getName();
         
     }
+
+    public function __construct(){
+        $this->createdat=$this->updatedat=$this->gameat= new \DateTime();        
+    }
+
+
 }
