@@ -152,4 +152,8 @@ class Team
     {
         return $this->createdat;
     }
+
+    public function __toString(){
+        return $this->name;
+    }
 }

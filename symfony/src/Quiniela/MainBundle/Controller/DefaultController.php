@@ -3,6 +3,8 @@
 namespace Quiniela\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Form\Extension\Core\Type\DateTimes;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -11,11 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 use SaadTazi\GChartBundle\DataTable;
 
 use Quiniela\MainBundle\Form\PredictionType;
+use Quiniela\MainBundle\Form\GameType;
 
 
 use Quiniela\MainBundle\Entity\Prediction;
+use Quiniela\MainBundle\Entity\Game;
 
-use Symfony\Component\Security\Core\SecurityContext;
 
 class DefaultController extends Controller
 {
@@ -84,9 +87,29 @@ class DefaultController extends Controller
         ));
     }
 
+    public function newGameAction(Request $request){
+            $game=new Game();
+            $game->setCreatedat( new \DateTime() );
+            $game->setUpdatedat( new \DateTime() );
+            $game->setGameat( new \DateTime());
+
+            $form=$this->createForm( new GameType(),$game );
+            
+            $form->handleRequest($request);
+
+            if($form->isValid()){
+                $em=$this->getDoctrine()->getManager();
+                $em->persist($game);
+                $em->flush();
+                return $this->redirect( $this->generateUrl('quiniela_general_table') );
+            }
+
+            return $this->render("QuinielaMainBundle:Default:newGame.html.twig",array('form'=>$form->createView()));
+    }
+
     public function generalTableAction(){
         
-        $season=3;
+        $season=1;
         //Obteniendo al usuario actual que está en el sistema
         $user=$this->get('security.context')->getToken()->getUser();        
         

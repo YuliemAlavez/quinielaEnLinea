@@ -182,4 +182,8 @@ class Season
     {
         return $this->updatedat;
     }
+
+    public function __toString(){
+        return $this->name;
+    }
 }
