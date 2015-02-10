@@ -248,4 +248,10 @@ class Prediction
     {
         return $this->user;
     }
+
+    public function __construct(){
+        $this->predictionat=$this->updatedat=$this->createdat=new \DateTime();
+
+    }
+
 }

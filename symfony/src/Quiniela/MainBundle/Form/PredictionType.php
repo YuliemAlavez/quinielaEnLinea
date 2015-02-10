@@ -20,8 +20,8 @@ class PredictionType extends AbstractType
             ->add('createdat','datetime')
             ->add('updatedat','datetime')
             ->add('predictionat','datetime',array('required' => true ))
-            ->add('game',array('required' => true ))
-            ->add('user',array('required' => true ))
+            ->add('game')
+            ->add('user')
             ->add('Guardar','submit')
         ;
     }

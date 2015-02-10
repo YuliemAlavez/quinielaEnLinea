@@ -61,6 +61,12 @@ class DefaultController extends Controller
     }
     public function newPredictionAction(Request $request){
         $prediction= new Prediction();
+
+
+        $user=$this->get('security.context')->getToken()->getUser();
+
+        $prediction->setUser($user);
+
         $form = $this->createForm(new PredictionType(),$prediction);
 
         $form->handleRequest($request);
@@ -72,6 +78,27 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('quiniela_list_all_teams'));
         }
         return $this->render("QuinielaMainBundle:Default:newPrediction.html.twig", array('form'=> $form->createView()));
+    }
+
+    public function newPredictionsAction(Request $request){
+        $prediction= new Prediction();
+
+
+        $user=$this->get('security.context')->getToken()->getUser();
+
+        $prediction->setUser($user);
+
+        $form = $this->createForm(new PredictionType(),$prediction);
+
+        $form->handleRequest($request);
+
+        if($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($prediction);
+            $em->flush();
+            return $this->redirect($this->generateUrl('quiniela_list_all_teams'));
+        }
+        return $this->render("QuinielaMainBundle:Default:newPredictions.html.twig", array('form'=> $form->createView()));
     }
     
     public function loginAction(Request $request){
@@ -107,42 +134,59 @@ class DefaultController extends Controller
 
     public function generalTableAction(){
         
-        $season=1;
+        $season=3;
         //Obteniendo al usuario actual que está en el sistema
         $user=$this->get('security.context')->getToken()->getUser();        
         
         //Obtengo de la base de datos a todos los usuarios
         $em= $this->getDoctrine()->getManager();   
 
+        $predictionsUsers;
 
         $users= $em->getRepository('QuinielaMainBundle:User')->findAll();
+
+        $gamesSeason=$em->getRepository('QuinielaMainBundle:Game')->findBySeason($season,array('gameat'=>'ASC'));
+
+        
+        
+       
         
         foreach ($users as $us ) {            
-            $query= $em->createQuery('  SELECT o,g FROM 
+            $query= $em->createQuery('  SELECT o,g,s FROM 
                                                     QuinielaMainBundle:Prediction o JOIN 
                                                     o.game g JOIN
                                                     g.season s
                                                 WHERE 
                                                     s = :season AND
-                                                    o.user = :user
-                                                ORDER BY 
-                                                    g.gameat ASC
-
+                                                    o.user = :user                                                
                                     ');
             $query->setParameter('season',$season);
             $query->setParameter('user',$us->getidUser());
 
-            $predictionsUsers[$us->getidUser()]=$query->getResult();
 
+
+            $predictionsUsers[$us->getidUser()]=$query->getResult();
+            $numberPredictions[$us->getidUser()]=count($predictionsUsers[$us->getidUser()])-1 ;
+
+
+
+            /*
+            for($i=1;$i<=count($predictionsUser);$i++){
+                $predictionsUsers[$us->getidUser()][$predictionsUser[$i]->getGame()]=$predictionsUser[$i];
+            }     
+            */            
+            
             //Obtengo todas la predicciones por usuario
         
-        
+            
            //Obtenemos las predicciones de los usuarios por todas las jornadas
            //$predictionsUsers[$us->getidUser()]=$em->getRepository('QuinielaMainBundle:Prediction')->findByUser($us);            
         }
+        
+       
 
-        $gamesSeason=$em->getRepository('QuinielaMainBundle:Game')->findBySeason($season);
 
+      
         //Obtenemos las predicciones del usuario por jornadas
         //$predictionsUser= $em->getRepository('QuinielaMainBundle:Prediction')->findAll;
 
@@ -153,7 +197,10 @@ class DefaultController extends Controller
 
         return $this->render('QuinielaMainBundle:Default:generalTable.html.twig',
                                 array('user'=>$user,'users'=>$users,'predictionsUsers'=>
-                                    $predictionsUsers,'gamesSeason'=>$gamesSeason)
+                                    $predictionsUsers,'gamesSeason'=>$gamesSeason,                                    
+                                    'numberPredictions' =>$numberPredictions
+                                    
+                                    )
                             );
 
 
