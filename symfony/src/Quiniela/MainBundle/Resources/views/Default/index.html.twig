@@ -1,2 +1,66 @@
-Hola {{ name }}!
+{% extends "::base.html.twig" %}
 
+	
+		{% block title %}Arcana by HTML5 UP{% endblock %}
+		
+	{% block body %}
+		
+
+		<!-- Footer -->
+			<div id="footer">
+				<div class="container">
+					<div class="row">
+						
+						
+						<section class="6u 12u(narrower)">
+							<h3>Bienvenido</h3>
+							<form>
+								<div class="row 50%">
+									<div class="6u 12u(mobilep)">
+										<input type="text" name="name" id="name" placeholder="Name" />
+									</div>
+									<div class="6u 12u(mobilep)">
+										<input type="email" name="email" id="email" placeholder="Email" />
+									</div>
+								</div>
+								
+								<div class="row 50%">
+									<div class="12u">
+										<ul class="actions">
+											<li><input type="submit" class="button alt" value="Entrar" /></li>
+										</ul>
+									</div>
+								</div>
+							</form>
+						</section>
+					</div>
+				</div>
+
+				
+
+				<!-- Copyright -->
+					<div class="copyright">
+						<ul class="menu">
+							<li>&copy; Todos los derechos reservados</li><li>Design: <a href="http://www.aldey.com.mx">Aldey, Inc.</a></li>
+						</ul>
+					</div>
+
+			</div>
+	{% endblock %}
+	{% block javascripts %}
+
+	<!--[if lte IE 8]><script src="{{asset('css/ie/html5shiv.js')}}"></script><![endif]-->
+		<script src="{{asset('js/jquery.min.js')}}"></script>
+		<script src="{{asset('js/jquery.dropotron.min.js')}}"></script>
+		<script src="{{asset('js/skel.min.js')}}"></script>
+		<script src="{{asset('js/skel-layers.min.js')}}"></script>
+		<script src="{{asset('js/init.js')}}"></script>
+	
+			<link rel="stylesheet" href="{{asset('css/skel.css')}}" />
+			<link rel="stylesheet" href="{{asset('css/style.css')}}" />
+			<link rel="stylesheet" href="{{asset('css/style-wide.css')}}" />
+		
+		<!--[if lte IE 8]><link rel="stylesheet" href="{{asset('css/ie/v8.css')}}" /><![endif]-->
+
+
+	{% endblock %}

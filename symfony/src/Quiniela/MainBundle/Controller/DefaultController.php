@@ -148,7 +148,7 @@ class DefaultController extends Controller
         $gamesSeason=$em->getRepository('QuinielaMainBundle:Game')->findBySeason($season,array('gameat'=>'ASC'));
 
         
-        
+        $totalPoints=array();
        
         
         foreach ($users as $us ) {            
@@ -166,15 +166,34 @@ class DefaultController extends Controller
 
 
             $predictionsUsers[$us->getidUser()]=$query->getResult();
-            $numberPredictions[$us->getidUser()]=count($predictionsUsers[$us->getidUser()])-1 ;
 
 
 
-            /*
-            for($i=1;$i<=count($predictionsUser);$i++){
-                $predictionsUsers[$us->getidUser()][$predictionsUser[$i]->getGame()]=$predictionsUser[$i];
+            //$numberPredictions[$us->getidUser()]=count($predictionsUsers[$us->getidUser()])-1 ;
+
+
+
+            
+            $totalPoints[$us->getidUser()]=0;
+            for($i=0;$i<=count($predictionsUsers[$us->getidUser()])-1;$i++){
+
+                if( ($predictionsUsers[$us->getidUser()][$i]->getScorelocalteam() == 
+                    $predictionsUsers[$us->getidUser()][$i]->getGame()->getScorelocalteam() ) &&
+                    ($predictionsUsers[$us->getidUser()][$i]->getScorevisitingteam() == 
+                    $predictionsUsers[$us->getidUser()][$i]->getGame()->getScorevisitingteam() )
+                ){
+                   $totalPoints[$us->getidUser()]+=3;
+                    /* 
+                    //Para poner puntos extras
+                    if($predictionsUsers[$us->getidUser()][$i].getDouble() == true ){
+                        $totalPoints[$us->getidUser()]+=3;
+                    }
+                    */
+                }
+             
+                
             }     
-            */            
+                       
             
             //Obtengo todas la predicciones por usuario
         
@@ -196,9 +215,12 @@ class DefaultController extends Controller
 
 
         return $this->render('QuinielaMainBundle:Default:generalTable.html.twig',
-                                array('user'=>$user,'users'=>$users,'predictionsUsers'=>
-                                    $predictionsUsers,'gamesSeason'=>$gamesSeason,                                    
-                                    'numberPredictions' =>$numberPredictions
+                                array(
+                                    'user'=>$user,
+                                    'users'=>$users,
+                                    'predictionsUsers'=>$predictionsUsers,
+                                    'totalPoints'=>$totalPoints,
+                                    'gamesSeason'=>$gamesSeason
                                     
                                     )
                             );

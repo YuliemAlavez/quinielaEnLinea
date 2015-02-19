@@ -58,7 +58,7 @@
 								<th> {{ prediction.game.idGame }}</th>																		
 								
 							{% endfor %}
-						
+						<th>{{ totalPoints[us.idUser] }}</th>
 					</tr>			
 				{% endfor %}
 			
@@ -102,15 +102,13 @@
 	-moz-border-radius-topleft:0px;
 	-webkit-border-top-left-radius:0px;
 	border-top-left-radius:0px;
-}
-.CSSTableGenerator table{
+}.CSSTableGenerator table{
     border-collapse: collapse;
         border-spacing: 0;
 	width:100%;
 	height:100%;
 	margin:0px;padding:0px;
-}
-.CSSTableGenerator tr:last-child td:last-child {
+}.CSSTableGenerator tr:last-child td:last-child {
 	-moz-border-radius-bottomright:0px;
 	-webkit-border-bottom-right-radius:0px;
 	border-bottom-right-radius:0px;
@@ -124,18 +122,15 @@
 	-moz-border-radius-topright:0px;
 	-webkit-border-top-right-radius:0px;
 	border-top-right-radius:0px;
-}
-.CSSTableGenerator tr:last-child td:first-child{
+}.CSSTableGenerator tr:last-child td:first-child{
 	-moz-border-radius-bottomleft:0px;
 	-webkit-border-bottom-left-radius:0px;
 	border-bottom-left-radius:0px;
-}
-.CSSTableGenerator tr:hover td{
+}.CSSTableGenerator tr:hover td{
 	
 }
 .CSSTableGenerator tr:nth-child(odd){ background-color:#aad4ff; }
-.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }
-.CSSTableGenerator td{
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
 	vertical-align:middle;
 	
 	
@@ -147,14 +142,11 @@
 	font-family:Arial;
 	font-weight:normal;
 	color:#000000;
-}
-.CSSTableGenerator tr:last-child td{
+}.CSSTableGenerator tr:last-child td{
 	border-width:0px 1px 0px 0px;
-}
-.CSSTableGenerator tr td:last-child{
+}.CSSTableGenerator tr td:last-child{
 	border-width:0px 0px 1px 0px;
-}s
-.CSSTableGenerator tr:last-child td:last-child{
+}.CSSTableGenerator tr:last-child td:last-child{
 	border-width:0px 0px 0px 0px;
 }
 .CSSTableGenerator tr:first-child td{
@@ -184,7 +176,6 @@
 .CSSTableGenerator tr:first-child td:last-child{
 	border-width:0px 0px 1px 1px;
 }
-
 </style>
 
 
