@@ -147,9 +147,14 @@ class DefaultController extends Controller
 
         $gamesSeason=$em->getRepository('QuinielaMainBundle:Game')->findBySeason($season,array('gameat'=>'ASC'));
 
+        $matrixPredictionsUsers=array();
+
+        foreach ($gamesSeason as $game) {
+            $matrixPredictionsUsers[0][ $game->getIdgame() ]= $game;
+        }
         
         $totalPoints=array();
-       
+        
         
         foreach ($users as $us ) {            
             $query= $em->createQuery('  SELECT o,g,s FROM 
@@ -170,30 +175,83 @@ class DefaultController extends Controller
 
 
             //$numberPredictions[$us->getidUser()]=count($predictionsUsers[$us->getidUser()])-1 ;
-
-
-
+            foreach ($predictionsUsers[$us->getidUser()] as $prediction) { 
+                //$totalPoints[$us->getidUser()]+=3;
+                //$matrixPredictionsUsers[$us->getidUser()][$prediction->getGame()]=$prediction;
+            }
+            
+            /*
+            $flag=true;
             
             $totalPoints[$us->getidUser()]=0;
-            for($i=0;$i<=count($predictionsUsers[$us->getidUser()])-1;$i++){
+            for($i=0;$i<9;$i++){
 
-                if( ($predictionsUsers[$us->getidUser()][$i]->getScorelocalteam() == 
-                    $predictionsUsers[$us->getidUser()][$i]->getGame()->getScorelocalteam() ) &&
-                    ($predictionsUsers[$us->getidUser()][$i]->getScorevisitingteam() == 
-                    $predictionsUsers[$us->getidUser()][$i]->getGame()->getScorevisitingteam() )
-                ){
-                   $totalPoints[$us->getidUser()]+=3;
-                    /* 
-                    //Para poner puntos extras
-                    if($predictionsUsers[$us->getidUser()][$i].getDouble() == true ){
-                        $totalPoints[$us->getidUser()]+=3;
-                    }
-                    */
+                if(isset( $predictionsUsers[$us->getidUser()][$i] )){
+                    $matrixPredictionsUsers[$us->getidUser()][$predictionsUsers[$us->getidUser()][$i]->getGame()]=$predictionsUsers[$us->getidUser()][$i];
                 }
-             
+                else{
+                    $matrixPredictionsUsers[$us->getidUser()][$predictionsUsers[$us->getidUser()][$i]->getGame()]=new Prediction();
+                    $flag=false;
+                }
+                if( $flag ){
+                    if( ($matrixPredictionsUsers[$us->getidUser()][$i]->getScorelocalteam() == 
+                            $matrixPredictionsUsers[$us->getidUser()][$i]->getGame()->getScorelocalteam() ) &&
+                            ($matrixPredictionsUsers[$us->getidUser()][$i]->getScorevisitingteam() == 
+                            $matrixPredictionsUsers[$us->getidUser()][$i]->getGame()->getScorevisitingteam() )
+                        )
+                    {
+                        $totalPoints[$us->getidUser()]+=3;
+                        
+                    }
+                    elseif( (   
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getGame()->getScorelocalteam() > 
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getGame()->getScorevisitingteam()
+                            ) 
+                            &&
+                            (
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getScorelocalteam() >
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getScorevisitingteam() 
+                            )
+
+                        )
+                    {
+                        $totalPoints[$us->getidUser()]+=1;
+
+                    }
+                    elseif( (   
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getGame()->getScorelocalteam() < 
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getGame()->getScorevisitingteam()
+                            ) 
+                            &&
+                            (
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getScorelocalteam() <
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getScorevisitingteam() 
+                            )
+
+                        )
+                    {
+                        $totalPoints[$us->getidUser()]+=1;
+
+                    }
+                    elseif( (   
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getGame()->getScorelocalteam() == 
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getGame()->getScorevisitingteam()
+                            ) 
+                            &&
+                            (
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getScorelocalteam() ==
+                                $matrixPredictionsUsers[$us->getidUser()][$i]->getScorevisitingteam() 
+                            )
+
+                        )
+                    {
+                        $totalPoints[$us->getidUser()]+=1;
+
+                    }
+                }
                 
             }     
-                       
+            */        
             
             //Obtengo todas la predicciones por usuario
         
@@ -220,7 +278,8 @@ class DefaultController extends Controller
                                     'users'=>$users,
                                     'predictionsUsers'=>$predictionsUsers,
                                     'totalPoints'=>$totalPoints,
-                                    'gamesSeason'=>$gamesSeason
+                                    'gamesSeason'=>$gamesSeason,
+                                    'matrixPredictionsUsers'=>$matrixPredictionsUsers
                                     
                                     )
                             );

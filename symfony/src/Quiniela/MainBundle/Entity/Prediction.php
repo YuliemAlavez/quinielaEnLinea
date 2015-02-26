@@ -31,6 +31,13 @@ class Prediction
     /**
      * @var integer
      *
+     * @ORM\Column(name="double", type="integer", nullable=false)
+     */
+    private $double = '0';
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="scoreVisitingTeam", type="integer", nullable=false)
      */
     private $scorevisitingteam = '0';
@@ -110,6 +117,31 @@ class Prediction
     {
         return $this->scorelocalteam;
     }
+
+    /**
+     * Set double
+     *
+     * @param integer $double
+     * @return Prediction
+     */
+    public function setDouble($double)
+    {
+        $this->double = $double;
+
+        return $this;
+    }
+
+    /**
+     * Get double
+     *
+     * @return integer 
+     */
+    public function getDouble()
+    {
+        return $this->double;
+    }
+
+   
 
     /**
      * Set scorevisitingteam

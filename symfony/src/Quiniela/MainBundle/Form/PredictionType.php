@@ -16,6 +16,7 @@ class PredictionType extends AbstractType
     {
         $builder
             ->add('scorelocalteam','integer',array('required' => true ))
+            ->add('double','integer',array('required' => true ))
             ->add('scorevisitingteam','integer',array('required' => true ))
             ->add('createdat','datetime')
             ->add('updatedat','datetime')
