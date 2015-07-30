@@ -1,0 +1,19 @@
+<%= form_for @game do |f| %>
+	<%= f.label :visintgteam_id %>
+	<%= f.select :visitingteam_id,Team.all %>
+	<br>
+	<%= f.label :scorelocalteam %>
+	<%= f.text_field :scorelocalteam %>
+	<br>
+	<%= f.label :localteam_id %>
+	<%= f.select :localteam_id,Team.all %>	
+	<br>
+	<%= f.label :scorevisitingteam %>
+	<%= f.text_field :scorevisitingteam %>
+	<br>
+	<%= f.label :game_at %>
+	<%= f.datetime_select :game_at,:order=>[:day,:month,:year] %>
+	<br>
+
+	<%= f.submit "Create game" %>
+<% end %>
