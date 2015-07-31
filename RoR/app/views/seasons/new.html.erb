@@ -12,13 +12,13 @@
 	<%= f.fields_for :games do |game| %>
   	<p>
 	    <%= game.label :visintgteam_id %>
-		<%= game.select :visitingteam_id,Team.all.map{|p| [p.name]} %>
+		<%= game.select :visitingteam_id,Team.all.map{|p| [p.name,p.id]} %>
 		<br>
 		<%= game.label :scorelocalteam %>
 		<%= game.text_field :scorelocalteam %>
 		<br>
 		<%= game.label :localteam_id %>
-		<%= game.select :localteam_id,Team.all.map{|p| [p.name]} %>	
+		<%= game.select :localteam_id,Team.all.map{|p| [p.name,p.id]} %>	
 		<br>
 		<%= game.label :scorevisitingteam %>
 		<%= game.text_field :scorevisitingteam %>

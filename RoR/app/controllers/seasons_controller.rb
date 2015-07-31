@@ -13,6 +13,7 @@ class SeasonsController < ApplicationController
 	end
 
 	def create
+		#binding.pry #no funcionó marca un error
 		@season=Season.new(season_params)
 		if @season.save
 			redirect_to seasons_path
@@ -23,7 +24,7 @@ class SeasonsController < ApplicationController
 
 	private
 	def season_params
-		params.require(:season).permit(:name, :seasonbegin, :seasonend)
+		params.require(:season).permit(:name, :seasonbegin, :seasonend, games_attributes: [:visitingteam_id,:scorelocalteam,:localteam_id,:scorevisitingteam,:game_at])
 	end
 
 end
