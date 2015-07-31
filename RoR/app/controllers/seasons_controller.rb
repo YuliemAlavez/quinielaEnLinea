@@ -8,9 +8,13 @@ class SeasonsController < ApplicationController
 		9.times { @season.games.build }
 	end
 
-	def newtotalseason
-		@season=Season.new
+	def show
+		@season= Season.find(params[:id])
 	end
+
+	def edit
+		@season= Season.find(params[:id])
+	end	
 
 	def create
 		#binding.pry #no funcionó marca un error
@@ -20,6 +24,10 @@ class SeasonsController < ApplicationController
 		else
 			render 'new'
 		end
+	end
+
+	def results
+		@season=Season.find(params[:id])
 	end
 
 	private

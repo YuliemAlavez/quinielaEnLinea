@@ -1,17 +1,16 @@
-
 <%= form_for(@season) do |f| %>
 	<%= f.label :name%>
-	<%= f.text_field :name %><br />
+	
 
 	<%= f.label :seasonbegin%>
-	<%= f.datetime_select :seasonbegin, :order=>[:day,:month,:year] %><br />
+	
 
 	<%= f.label :seasonend%>
-	<%= f.datetime_select :seasonend, :order=>[:day,:month,:year] %><br />
+	
 
 	<%= f.fields_for :games do |game| %>
   	<p>
-	    <%= game.label :visintgteam_id %>
+	    <%= game.label @ %>
 		<%= game.select :visitingteam_id,Team.all.map{|p| [p.name,p.id]} %>
 		<br>
 		<%= game.label :localteam_id %>

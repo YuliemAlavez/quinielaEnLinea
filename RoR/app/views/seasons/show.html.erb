@@ -1,0 +1,9 @@
+<%= @season.name %>
+<br>
+<% @season.games.each do |game| %>
+	<%= Team.find(game.localteam_id).name %>
+	<%= Team.find(game.visitingteam_id).name %>
+	<br>
+<% end %>
+
+<%= link_to "Editar", edit_season_path(@season) %>

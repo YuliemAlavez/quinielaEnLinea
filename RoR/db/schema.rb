@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730205804) do
+ActiveRecord::Schema.define(version: 20150731213118) do
 
   create_table "games", force: :cascade do |t|
     t.integer  "season_id"
-    t.integer  "scorelocalteam"
-    t.integer  "scorevisitingteam"
+    t.integer  "scorelocalteam",    default: -1
+    t.integer  "scorevisitingteam", default: -1
     t.datetime "game_at"
     t.datetime "created_at"
     t.datetime "updated_at"
