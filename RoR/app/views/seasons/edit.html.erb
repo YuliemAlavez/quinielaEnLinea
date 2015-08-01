@@ -10,11 +10,12 @@
 
 	<%= f.fields_for :games do |game| %>
   	<p>
-	    <%= game.label :visintgteam_id %>
-		<%= game.select :visitingteam_id,Team.all.map{|p| [p.name,p.id]} %>
-		<br>
+	    
 		<%= game.label :localteam_id %>
 		<%= game.select :localteam_id,Team.all.map{|p| [p.name,p.id]} %>	
+		<br>
+		<%= game.label :visitingteam_id %>
+		<%= game.select :visitingteam_id,Team.all.map{|p| [p.name,p.id]} %>
 		<br>		
 		<%= game.label :game_at %>
 		<%= game.datetime_select :game_at,:order=>[:day,:month,:year] %>
@@ -22,5 +23,5 @@
   	</p>
   	<% end %>
 
-	<%= f.submit "Create Season" %>
+	<%= f.submit "Edit Season" %>
 <% end %>

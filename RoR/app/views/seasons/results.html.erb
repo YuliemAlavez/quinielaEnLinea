@@ -1,26 +1,17 @@
+
+<%= @season.name %>
+<%= @season.seasonbegin %>
+<%= @season.seasonend %>
+
+
 <%= form_for(@season) do |f| %>
-	<%= f.label :name%>
 	
-
-	<%= f.label :seasonbegin%>
-	
-
-	<%= f.label :seasonend%>
-	
-
 	<%= f.fields_for :games do |game| %>
-  	<p>
-	    <%= game.label @ %>
-		<%= game.select :visitingteam_id,Team.all.map{|p| [p.name,p.id]} %>
-		<br>
 		<%= game.label :localteam_id %>
-		<%= game.select :localteam_id,Team.all.map{|p| [p.name,p.id]} %>	
-		<br>		
-		<%= game.label :game_at %>
-		<%= game.datetime_select :game_at,:order=>[:day,:month,:year] %>
-		<br>
-  	</p>
-  	<% end %>
+		<%= game.text_field :scorelocalteam %>
 
-	<%= f.submit "Create Season" %>
+		<%= game.label :visiting_id %>
+		<%= game.text_field :scorevisitingteam %>
+	<% end %>
+	<%= f.submit "Edit Season"%>
 <% end %>

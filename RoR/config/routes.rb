@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :teams, only:  [:new, :create,:index, :edit]
   resources :games, only: [:new,:create,:index]
-  resources :seasons, only: [:new,:create,:index,:edit,:show]
+  resources :seasons, only: [:new,:create,:index,:edit,:update,:show]
 
 
   # Example of regular route:
