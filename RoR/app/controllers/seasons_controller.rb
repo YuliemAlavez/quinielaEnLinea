@@ -3,6 +3,11 @@ class SeasonsController < ApplicationController
 	def index
 		@seasons=Season.all.order(seasonbegin: :asc)
 	end
+
+	def show
+		@season= Season.find(params[:id])
+	end
+
 	def new
 		@season=Season.new
 		9.times { @season.games.build }
@@ -16,10 +21,6 @@ class SeasonsController < ApplicationController
 		else
 			render 'new'
 		end
-	end
-
-	def show
-		@season= Season.find(params[:id])
 	end
 
 	def edit
@@ -36,10 +37,9 @@ class SeasonsController < ApplicationController
 		end
 	end
 	
-
 	def results
 		@season=Season.find(params[:id])
-		@games=@season.games.build
+		
 	end
 
 	private

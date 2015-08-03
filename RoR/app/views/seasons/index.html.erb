@@ -1,4 +1,4 @@
 Temporadas
 <% @seasons.each do |season| %>
-	<%= season.name %>
+	<%= link_to season.name, season_path(season) %>
 <% end %>
