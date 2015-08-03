@@ -8,10 +8,8 @@
 
 	<%= f.fields_for :games,@season.games do |game| %>
 
-		<%= game.label game.object.localteam.name %>
-		
+		<%= game.label game.object.localteam.name %>		
 		<%= game.text_field :scorelocalteam %>
-
 		<%= game.label game.object.visitingteam.name %>
 		<%= game.text_field :scorevisitingteam %>
 		<br>

@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   resources :games, only: [:new,:create,:index]
   resources :seasons, only: [:new,:create,:index,:edit,:update,:show]
 
-
+  resources :predictions, only: [:new]
   # Example of regular route:
   get 'seasons/:id/results' => 'seasons#results'
+
+  get 'seasons/:id/prediction' => 'seasons#prediction'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

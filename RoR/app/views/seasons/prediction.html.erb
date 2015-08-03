@@ -1,0 +1,21 @@
+<%= @season.name %>
+<%= @season.seasonbegin %>
+<%= @season.seasonend %>
+
+
+
+<%= form_for @season, url: {action: "update"}, html: {method: "patch"} do |f| %>
+	
+	<%= f.fields_for :games,@season.games do |game| %>				
+
+		<%= game.label game.object.localteam.name %>		
+		<%= game.label game.object.visitingteam.name %>		
+
+		<%= game.fields_for :predictions,game.object.predictions.build do |prediction| %>
+			<%= prediction.text_field :scorelocalteam %>
+			<%= prediction.text_field :scorevisitingteam  %>
+		<% end %>
+		<br>
+	<% end %>
+	<%= f.submit "Do prediction"%>
+<% end %>

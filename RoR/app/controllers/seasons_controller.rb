@@ -23,28 +23,36 @@ class SeasonsController < ApplicationController
 		end
 	end
 
+	def prediction
+		@season=Season.find(params[:id])	
+		
+	end
+
 	def edit
 		@season= Season.find(params[:id])
 	end	
 
+	def results
+		@season= Season.find(params[:id])		
+	end	
+
 	def update
+
+		binding.pry
 		@season= Season.find(params[:id])
 
 		if @season.update(season_params)
 			redirect_to seasons_path
+			binding.pry
 		else
 			render 'edit'
+			binding.pry
 		end
-	end
-	
-	def results
-		@season=Season.find(params[:id])
-		
-	end
+	end	
 
 	private
 	def season_params
-		params.require(:season).permit(:name, :seasonbegin, :seasonend, games_attributes: [:id,:visitingteam_id,:scorelocalteam,:localteam_id,:scorevisitingteam,:game_at])
+		params.require(:season).permit(:id,:name, :seasonbegin, :seasonend, games_attributes: [:id,:visitingteam_id,:scorelocalteam,:localteam_id,:scorevisitingteam,:game_at,predictions_attributes: [:id,:scorelocalteam,:scorevisitingteam]])
 	end
 
 

@@ -1,8 +1,8 @@
 <%= @season.name %>
 <br>
 <% @season.games.each do |game| %>
-	<%= Team.find(game.localteam_id).name %>
-	<%= Team.find(game.visitingteam_id).name %>
+	<%= game.localteam.name %> <%= (game.scorelocalteam<0)? '-' : game.scorelocalteam  %> VS
+	<%= game.visitingteam.name %> <%= (game.scorelocalteam<0)? '-' : game.scorelocalteam  %>
 	<br>
 <% end %>
 
