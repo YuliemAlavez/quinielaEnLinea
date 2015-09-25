@@ -7,13 +7,13 @@
 <%= form_for @season, url: {action: "update"}, html: {method: "patch"} do |f| %>
 	
 	<%= f.fields_for :games,@season.games do |game| %>				
-
-		<%= game.label game.object.localteam.name %>		
-		<%= game.label game.object.visitingteam.name %>		
-
 		<%= game.fields_for :predictions,game.object.predictions.build do |prediction| %>
+			<%= game.label :localteam,game.object.localteam.name %>		
 			<%= prediction.text_field :scorelocalteam %>
+
+			
 			<%= prediction.text_field :scorevisitingteam  %>
+			<%= game.label :visitingteam,game.object.visitingteam.name %>			
 		<% end %>
 		<br>
 	<% end %>
